@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <!-- Apple Touch Icon (iOS) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- Android/Chrome -->
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OnlineTutoria</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+  <script>
+    // This handles page refreshes
+    (function () {
+      // Save the current path before the page reloads
+      window.addEventListener("beforeunload", function () {
+        sessionStorage.setItem("persistPath", window.location.pathname);
+      });
+
+      // Restore the path after page loads
+      window.addEventListener("load", function () {
+        const persistPath = sessionStorage.getItem("persistPath");
+        if (persistPath && persistPath !== window.location.pathname) {
+          history.replaceState(null, null, persistPath);
+        }
+        sessionStorage.removeItem("persistPath");
+      });
+    })();
+  </script>
+</html>
