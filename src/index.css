@@ -167,47 +167,89 @@ h2 {
   margin-bottom: 2rem;
 }
 
-.marquee-wrapper {
-  overflow: hidden;
+.testimonials-slider {
   position: relative;
-  width: 100%;
+  padding: 0 2.5rem;
 }
 
-.marquee-track {
+.testimonials-scroll {
   display: flex;
-  width: fit-content;
-  animation: scroll-marquee 40s linear infinite;
+  gap: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-@keyframes scroll-marquee {
-  0% {
-    transform: translateX(0%);
-  }
+.testimonials-scroll::-webkit-scrollbar {
+  display: none;
+}
 
-  100% {
-    transform: translateX(-50%);
+.testimonials-scroll-item {
+  flex: 0 0 calc(33.333% - 0.67rem);
+  scroll-snap-align: start;
+  min-width: 280px;
+}
+
+@media (max-width: 1024px) {
+  .testimonials-scroll-item {
+    flex: 0 0 calc(50% - 0.5rem);
+    min-width: 260px;
   }
 }
 
-.testimonial-card {
-  flex: 0 0 auto;
-  width: 300px;
-  margin-right: 1rem;
+@media (max-width: 640px) {
+  .testimonials-scroll-item {
+    flex: 0 0 85%;
+    min-width: 240px;
+  }
+}
+
+.testimonials-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid #e5e7eb;
   background: white;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  color: #374151;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
-.testimonial-card:hover {
-  transform: scale(1.02);
+.testimonials-arrow-prev {
+  left: 0;
 }
 
-@media (max-width: 768px) {
-  .testimonial-card {
-    width: 250px;
-    padding: 1rem;
+.testimonials-arrow-next {
+  right: 0;
+}
+
+.testimonials-arrow:hover {
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+@media (max-width: 640px) {
+  .testimonials-slider {
+    padding: 0 1.75rem;
+  }
+
+  .testimonials-arrow {
+    width: 2rem;
+    height: 2rem;
   }
 }
 

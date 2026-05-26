@@ -1,23 +1,8 @@
 import { TestimonialsSection } from "../components/ui/testimonials-with-marquee";
 import { useState, useEffect } from "react";
 
-const testimonials = [
-  {
-    author: {
-      name: "Emma Thompson",
-      handle: "@emmaai",
-      avatar:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
-    },
-    text: "Using this AI platform has transformed how we handle data analysis. The speed and accuracy are unprecedented.",
-    href: "https://twitter.com/emmaai",
-  },
-];
-
 export default function Testimonials() {
   const [testimonials, setTestimonials] = useState([]);
-
-  console.log(testimonials, "Test");
 
   useEffect(() => {
     const fetchFeedbacks = async () => {
@@ -29,14 +14,13 @@ export default function Testimonials() {
 
         const data = await res.json();
 
-        // Transform the feedbacks to the expected format
         const transformed = data.map((feedback) => ({
           author: {
             name: feedback.fullName,
-            avatar: feedback.picture,
-            handle: `@${feedback.category.toLowerCase()}`, // optional
+            category: feedback.category,
           },
           text: feedback.message,
+          rating: 5,
         }));
 
         setTestimonials(transformed);

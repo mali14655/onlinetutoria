@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaTimes, FaWhatsapp, FaCopy } from "react-icons/fa";
 import { AnimatePresence } from "framer-motion";
 import QRcode from "../../public/QRCode.jpeg";
+import { SITE_EMAIL } from "../constants/contact";
 
 export const PaymentModal = ({ isOpen, onClose, price }) => {
   const bankDetails = {
@@ -155,8 +156,15 @@ export const PaymentModal = ({ isOpen, onClose, price }) => {
 
             <div className="text-center text-sm text-gray-500">
               <p>
-                If you have any problem or query, feel free to contact us
-                directly on WhatsApp.
+                If you have any problem or query, feel free to contact us on
+                WhatsApp or email us at{" "}
+                <a
+                  href={`mailto:${SITE_EMAIL}`}
+                  className="text-blue-600 hover:underline"
+                >
+                  {SITE_EMAIL}
+                </a>
+                .
               </p>
             </div>
           </div>

@@ -3,6 +3,7 @@ import emailjs from "emailjs-com";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaEnvelope, FaWhatsapp, FaInstagram, FaLinkedin, FaFacebook } from "react-icons/fa";
 import { FaSpinner } from "react-icons/fa";
+import { SITE_EMAIL } from "../constants/contact";
 
 export default function Contact() {
   const form = useRef();
@@ -67,7 +68,7 @@ export default function Contact() {
           <ul className="space-y-4 text-gray-700 text-lg">
             <li className="flex items-center gap-3 hover:text-blue-500 transition">
               <FaEnvelope className="text-blue-600" />
-              <a href="mailto:mazharrehman5678@gmail.com">mazharrehman5678@gmail.com</a>
+              <a href={`mailto:${SITE_EMAIL}`}>{SITE_EMAIL}</a>
             </li>
             <li className="flex items-center gap-3 hover:text-bkue-500 transition">
               <FaWhatsapp className="text-green-500" />

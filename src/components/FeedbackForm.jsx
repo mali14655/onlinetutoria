@@ -8,30 +8,22 @@ const FeedbackForm = () => {
     fullName: "",
     category: "Student",
     message: "",
-    picture: null,
   });
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === "picture") {
-      setFormData({ ...formData, picture: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    document.body.style.overflow = "hidden"; // Disable scroll
+    document.body.style.overflow = "hidden";
 
     const data = new FormData();
     data.append("fullName", formData.fullName);
     data.append("category", formData.category);
     data.append("message", formData.message);
-    if (formData.picture) {
-      data.append("picture", formData.picture);
-    }
 
     try {
       const res = await fetch(
@@ -55,31 +47,28 @@ const FeedbackForm = () => {
 
       const result = await res.json();
       console.log("Feedback submitted:", result);
-      // Optionally reset form
       setFormData({
         fullName: "",
         category: "Student",
         message: "",
-        picture: null,
       });
     } catch (err) {
       console.error("Error submitting feedback:", err.message);
     } finally {
       setLoading(false);
-      document.body.style.overflow = ""; // Restore scroll
+      document.body.style.overflow = "";
     }
   };
 
   return (
-    <div className="w-full px-5 md:px-0" >
-      {loading && <Loader/>}
+    <div className="w-full px-5 md:px-0">
+      {loading && <Loader />}
       <div className="w-full max-w-2xl mx-auto mt-5 p-6 mb-10 bg-white shadow-lg rounded-2xl">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
           Submit Your Feedback
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Full Name */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Full Name
@@ -95,7 +84,6 @@ const FeedbackForm = () => {
             />
           </div>
 
-          {/* Category */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Category
@@ -111,7 +99,6 @@ const FeedbackForm = () => {
             </select>
           </div>
 
-          {/* Feedback */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Feedback
@@ -127,21 +114,6 @@ const FeedbackForm = () => {
             />
           </div>
 
-          {/* Picture */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Upload Picture
-            </label>
-            <input
-              type="file"
-              name="picture"
-              accept="image/*"
-              onChange={handleChange}
-              className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-white file:bg-blue-600 hover:file:bg-blue-700"
-            />
-          </div>
-
-          {/* Submit Button */}
           <div className="text-center">
             <button
               type="submit"
